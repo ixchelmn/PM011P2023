@@ -10,7 +10,7 @@ import android.widget.Button;
 public class ActivityPrincipal extends AppCompatActivity
 {
     Button btn_ingresar;
-    Button btn_lista;
+    Button btn_lista, btn_combo;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -19,8 +19,10 @@ public class ActivityPrincipal extends AppCompatActivity
 
         btn_ingresar = (Button) findViewById(R.id.btn_ingresar);
         btn_lista = (Button) findViewById(R.id.btn_lista);
+        btn_combo = (Button) findViewById(R.id.btn_combo);
 
-        btn_ingresar.setOnClickListener(new View.OnClickListener() {
+        btn_ingresar.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
@@ -29,11 +31,22 @@ public class ActivityPrincipal extends AppCompatActivity
             }
         });
 
-        btn_lista.setOnClickListener(new View.OnClickListener() {
+        btn_lista.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {
                 Intent intent = new Intent(getApplicationContext(), ActivityListView.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_combo.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent  intent = new Intent(getApplicationContext(),ActivityCombo.class);
                 startActivity(intent);
             }
         });
