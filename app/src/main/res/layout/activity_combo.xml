@@ -8,9 +8,9 @@
     tools:context=".ActivityCombo">
 
     <Spinner
+        android:id="@+id/combopersonas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/combopersonas"/>
+        android:layout_height="wrap_content" />
 
     <EditText
         android:id="@+id/txtcbid"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Nombres"
         android:inputType="textPersonName" />
 
     <EditText

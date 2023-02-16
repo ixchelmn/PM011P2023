@@ -12,11 +12,11 @@ import com.example.pm011p2023.configuracion.SQLiteConexion;
 import com.example.pm011p2023.transacciones.Personas;
 import com.example.pm011p2023.transacciones.Transacciones;
 
+import java.sql.SQLData;
 import java.util.ArrayList;
 
 public class ActivityListView extends AppCompatActivity {
-
-    //Variables Globales
+    // Variables Globales
     SQLiteConexion conexion;
     ListView listView;
     ArrayList<Personas> listapersonas;
@@ -43,8 +43,8 @@ public class ActivityListView extends AppCompatActivity {
         Personas person = null;
         listapersonas = new ArrayList<Personas>();
 
-        //cursor
-        Cursor cursor = db.rawQuery("SELECT * FROM personas",null);
+        // Cursor
+        Cursor cursor = db.rawQuery("SELECT * FROM personas", null );
 
         while(cursor.moveToNext())
         {
@@ -52,15 +52,14 @@ public class ActivityListView extends AppCompatActivity {
             person.setId(cursor.getInt(0));
             person.setNombres(cursor.getString(1));
             person.setApellidos(cursor.getString(2));
-            person.setCorreo(cursor.getString(3));
-            person.setEdad(cursor.getInt(4));
+            person.setEdad(cursor.getInt(3));
+            person.setCorreo(cursor.getString(4));
 
             listapersonas.add(person);
         }
 
         cursor.close();
         FillList();
-
     }
 
     private void FillList()
@@ -68,8 +67,8 @@ public class ActivityListView extends AppCompatActivity {
         Arreglopersonas = new ArrayList<String>();
         for(int i = 0; i < listapersonas.size(); i++)
         {
-            Arreglopersonas.add(listapersonas.get(i).getId() + " | " +
-                    listapersonas.get(i).getNombres() + " | " +
+            Arreglopersonas.add(listapersonas.get(i).getId() + " | "+
+                    listapersonas.get(i).getNombres() + " | "+
                     listapersonas.get(i).getApellidos() + " | ");
         }
     }

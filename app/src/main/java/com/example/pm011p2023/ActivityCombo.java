@@ -27,11 +27,12 @@ public class ActivityCombo extends AppCompatActivity {
     ArrayList<String> Arreglopersonas;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_combo);
 
-        conexion = new SQLiteConexion(this, Transacciones.NameDatabase, null, 1);
+        conexion  = new SQLiteConexion(this, Transacciones.NameDatabase, null, 1);
         combopersonas = (Spinner) findViewById(R.id.combopersonas);
         txtnombres = (EditText) findViewById(R.id.txtcbnombres);
         txtapellidos = (EditText) findViewById(R.id.txtcbapellidos);
@@ -44,10 +45,17 @@ public class ActivityCombo extends AppCompatActivity {
 
         combopersonas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int indice, long l) {
-                txtnombres.setText(listapersonas.get(indice).getNombres());
-                txtid.setText(listapersonas.get(indice).getId().toString());
-                txtapellidos.setText(listapersonas.get(indice).getApellidos());
+            public void onItemSelected(AdapterView<?> adapterView, View view, int indice, long l)
+            {
+                try {
+                    txtnombres.setText(listapersonas.get(indice).getNombres());
+                    txtid.setText(listapersonas.get(indice).getId());
+                    txtapellidos.setText(listapersonas.get(indice).getApellidos());
+                }catch (Exception ex)
+                {
+                    ex.toString();
+                }
+
             }
 
             @Override
@@ -57,14 +65,15 @@ public class ActivityCombo extends AppCompatActivity {
         });
 
     }
+
     private void ObtenerListaPersonas()
     {
         SQLiteDatabase db = conexion.getReadableDatabase();
         Personas person = null;
         listapersonas = new ArrayList<Personas>();
 
-        //cursor
-        Cursor cursor = db.rawQuery("SELECT * FROM personas",null);
+        // Cursor
+        Cursor cursor = db.rawQuery("SELECT * FROM personas", null );
 
         while(cursor.moveToNext())
         {
@@ -72,15 +81,14 @@ public class ActivityCombo extends AppCompatActivity {
             person.setId(cursor.getInt(0));
             person.setNombres(cursor.getString(1));
             person.setApellidos(cursor.getString(2));
-            person.setCorreo(cursor.getString(3));
-            person.setEdad(cursor.getInt(4));
+            person.setEdad(cursor.getInt(3));
+            person.setCorreo(cursor.getString(4));
 
             listapersonas.add(person);
         }
 
         cursor.close();
         FillList();
-
     }
 
     private void FillList()
@@ -88,8 +96,8 @@ public class ActivityCombo extends AppCompatActivity {
         Arreglopersonas = new ArrayList<String>();
         for(int i = 0; i < listapersonas.size(); i++)
         {
-            Arreglopersonas.add(listapersonas.get(i).getId() + " | " +
-                    listapersonas.get(i).getNombres() + " | " +
+            Arreglopersonas.add(listapersonas.get(i).getId() + " | "+
+                    listapersonas.get(i).getNombres() + " | "+
                     listapersonas.get(i).getApellidos() + " | ");
         }
     }
